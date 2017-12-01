@@ -69,7 +69,7 @@ if (cliOptions.help) {
   web3.setProvider(new web3.providers.HttpProvider('http://localhost:8545'));
 
   // Config
-  const solidityFile = './smart_contract/etherdelta.sol';
+  const solidityFile = './etherdelta.sol';
   const contractName = 'EtherDelta';
   const solcVersion = 'v0.4.9+commit.364da425';
   const address = cliOptions.address;
@@ -85,6 +85,10 @@ if (cliOptions.help) {
   solc.loadRemoteVersion(solcVersion, (err, solcV) => {
     console.log('Solc version:', solcV.version());
     fs.readFile(solidityFile, (errRead, result) => {
+      if (errRead) {
+        console.error(errRead);
+        process.exit(1);
+      }
       const source = result.toString();
       const output = solcV.compile(source, 1); // 1 activates the optimiser
       if (output.errors) console.log(output.errors);
