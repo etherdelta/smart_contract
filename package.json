@@ -36,5 +36,9 @@
     "eslint": "3.18.0",
     "eslint-config-airbnb-base": "11.1.2",
     "eslint-plugin-import": "2.2.0"
+  },
+  "scripts": {
+    "test": "./node_modules/.bin/mocha .",
+    "lint": "./node_modules/.bin/eslint ."
   }
 }
